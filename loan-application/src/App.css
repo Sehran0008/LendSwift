@@ -1,0 +1,491 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #1e293b;
+  background: #f1f5f9;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24px 16px 40px;
+}
+
+.header {
+  max-width: 760px;
+  margin: 0 auto 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.brand {
+  color: #1f4e79;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.form-card {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 32px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 35px #0f172a0d;
+}
+
+h1 {
+  margin: 0;
+  color: #1f4e79;
+  font-size: 28px;
+}
+
+.subtitle {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+  font-size: 13px;
+  color: #475569;
+}
+
+.progress-track {
+  height: 8px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #e2e8f0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #27ae60;
+  transition: width 0.25s ease;
+}
+
+.step-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 30px 0 24px;
+}
+
+.step-heading h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #eaf2f8;
+  color: #1f4e79;
+  font-weight: bold;
+}
+
+.fields {
+  display: grid;
+  gap: 20px;
+}
+
+.fields label {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: white;
+  color: #1e293b;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #93c5fd;
+  border-color: #1f4e79;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 18px;
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+.summary span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.summary strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.placeholder {
+  padding: 18px;
+  background: #f8fafc;
+  border-radius: 10px;
+  line-height: 1.6;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+button {
+  min-height: 44px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.primary {
+  color: white;
+  background: #1f4e79;
+}
+
+.primary:hover {
+  background: #173b5c;
+}
+
+.secondary {
+  color: #1f4e79;
+  background: #eaf2f8;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.footer-note {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: #64748b;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 16px 10px;
+  }
+
+  .form-card {
+    padding: 22px 16px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .navigation button {
+    padding: 12px;
+  }
+}
+
+/* EMI Calculator - Professional Design */
+.placeholder {
+  margin-top: 24px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.placeholder h3 {
+  margin: 0 0 20px;
+  color: #1f4e79;
+  font-size: 22px;
+}
+
+.placeholder label {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.placeholder p {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 12px 0;
+  padding: 14px;
+  background: #f1f5f9;
+  border-radius: 10px;
+  color: #475569;
+}
+
+.placeholder p strong {
+  color: #0f766e;
+  font-size: 17px;
+}
+
+.placeholder .footer-note {
+  display: block;
+  margin-top: 16px;
+  padding: 0;
+  background: transparent;
+  font-size: 12px;
+  color: #64748b;
+}
+
+
+/* LendSwift - Professional UI Improvements */
+
+* {
+  box-sizing: border-box;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 32px 16px;
+  background: linear-gradient(135deg, #eef4ff, #f7f9fc);
+}
+
+.header {
+  max-width: 900px;
+  margin: 0 auto 24px;
+}
+
+.brand {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #2457d6;
+}
+
+.form-card {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px;
+  border: 1px solid #e5eaf3;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 16px 45px rgba(30, 55, 100, 0.08);
+}
+
+.form-card h1 {
+  color: #172b4d;
+  font-size: 30px;
+  margin-top: 0;
+}
+
+.subtitle {
+  color: #68758b;
+  line-height: 1.6;
+}
+
+.progress-track {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #e9eef8;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #2457d6, #648cff);
+  transition: width 0.3s ease;
+}
+
+.step-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 22px;
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #eaf0ff;
+  color: #2457d6;
+  font-weight: 800;
+}
+
+.fields {
+  gap: 20px;
+}
+
+.fields label {
+  color: #27364f;
+  font-weight: 600;
+}
+
+.fields input:not([type="checkbox"]):not([type="file"]),
+.fields select {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border: 1px solid #d9e1ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #172b4d;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.fields input:focus,
+.fields select:focus {
+  border-color: #4776e6;
+  box-shadow: 0 0 0 3px rgba(71, 118, 230, 0.12);
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 22px;
+  border: 1px solid #e3eaf7;
+  border-radius: 14px;
+  background: #f8faff;
+}
+
+.summary span {
+  color: #69778d;
+}
+
+.summary strong {
+  color: #172b4d;
+  overflow-wrap: anywhere;
+}
+
+.navigation,
+.edit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.primary,
+.secondary {
+  min-height: 44px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.primary {
+  border: none;
+  background: #2457d6;
+  color: white;
+  box-shadow: 0 5px 14px rgba(36, 87, 214, 0.2);
+}
+
+.secondary {
+  border: 1px solid #d9e1ef;
+  background: white;
+  color: #2457d6;
+}
+
+.primary:hover,
+.secondary:hover {
+  transform: translateY(-1px);
+}
+
+.primary:disabled,
+.secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.placeholder {
+  padding: 20px;
+  border: 1px solid #e3eaf7;
+  border-radius: 14px;
+  background: #f8faff;
+  line-height: 1.7;
+}
+
+.footer-note {
+  color: #78859a;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 20px 12px;
+  }
+
+  .form-card {
+    padding: 20px 16px;
+    border-radius: 15px;
+  }
+
+  .form-card h1 {
+    font-size: 24px;
+  }
+
+  .summary {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .navigation,
+  .edit-actions {
+    flex-direction: column;
+  }
+
+  .navigation button,
+  .edit-actions button {
+    width: 100%;
+  }
+}
