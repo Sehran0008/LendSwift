@@ -15,7 +15,7 @@ function AdminDashboard({ token }) {
     
 try {
   const response = await fetch(
-    "http://localhost:5000/api/applications",
+   `${import.meta.env.VITE_API_URL}/api/applications`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ try {
       setLoadError("");
     
       const response = await fetch(
-        `http://localhost:5000/api/applications/${encodeURIComponent(appToUpdate.databaseId)}/status`,
+       `${import.meta.env.VITE_API_URL}/api/applications/${encodeURIComponent(appToUpdate.databaseId)}/status`,
     {
           method: "PATCH",
           headers: {
@@ -132,8 +132,8 @@ if (!response.ok) {
     try {
       setLoadError("");
     
-const response = await fetch(
-  `http://localhost:5000/api/applications/${encodeURIComponent(appToDelete.databaseId)}`,
+     const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/applications/${encodeURIComponent(appToDelete.databaseId)}`,
   {
     method: "DELETE",
     headers: {
