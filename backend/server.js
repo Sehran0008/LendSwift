@@ -4,6 +4,7 @@ const cors = require("cors");
 const crypto = require("crypto");
 require("dotenv").config();
 const mongoose = require("mongoose");
+const rateLimit = require("express-rate-limit");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -102,9 +103,19 @@ function requireAdmin(req, res, next) {
 
   next();
 }
+// Admin login rate limiter
+const adminLoginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: {
+    message: "Too many login attempts. Please try again after 15 minutes."
+  }
+});
 
 // Admin login
-app.post("/api/admin/login", (req, res) => {
+ app.post("/api/admin/login", adminLoginLimiter, (req, res) => {
   if (!ADMIN_EMAIL || !ADMIN_PASSWORD_HASH || !ADMIN_TOKEN_SECRET) {
     return res.status(503).json({
       message: "Admin login is not configured. Check backend .env.",
