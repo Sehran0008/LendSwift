@@ -1,16 +1,106 @@
-# React + Vite
+# LendSwift — Online Loan Application System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+LendSwift is a full-stack web application that allows users to fill out loan application forms, review their details, and submit applications. An admin dashboard allows authorized administrators to view submitted applications.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend:** https://lendswift-4.onrender.com
+- **Backend:** https://lendswift-3.onrender.com
 
-## React Compiler
+> This project is intended for demonstration and educational purposes. It does not provide real loans or process real loan approvals.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Multi-step loan application form
+- Personal, home, and business loan options
+- Loan EMI calculation
+- Applicant information and document steps
+- Form validation and application submission
+- MongoDB database integration
+- Admin login and protected application dashboard
+- Search and filter applications
+- Responsive user interface
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+**Frontend**
+- React
+- Vite
+- JavaScript
+- HTML
+- CSS
+
+**Backend**
+- Node.js
+- Express.js
+- MongoDB
+- MongoDB Node.js integration
+
+**Deployment**
+- Render
+- MongoDB Atlas
+- GitHub
+
+## Application Workflow
+
+1. Select a loan type and enter loan details.
+2. Complete the applicant information.
+3. Review the application.
+4. Submit the application.
+5. Authorized admins can view saved applications in the dashboard.
+
+## Run Locally
+
+### Prerequisites
+- Node.js and npm
+- MongoDB Atlas account or a local MongoDB instance
+
+### Backend Setup
+
+```bash
+cd backend
+npm install
+```
+
+Configure the required environment variables using the project's existing configuration and documentation. Never commit credentials or secret values.
+
+Start the backend using the start script defined in `backend/package.json`.
+
+### Frontend Setup
+
+```bash
+cd loan-application
+npm install
+```
+
+Create a local `.env` file with the appropriate API URL configuration:
+
+```env
+VITE_API_URL=http://localhost:10000
+```
+
+Run the frontend:
+
+```bash
+npm run dev
+```
+
+Use the actual backend port configured in your local environment if it differs.
+
+## Security Notes
+
+- Admin access is protected by authentication.
+- Database access should follow the principle of least privilege.
+- Store passwords, database connection strings, and token secrets in environment variables.
+- Do not commit `.env` files or real applicant information.
+- This demonstration project has not been represented as a production-ready lending platform.
+
+## Author
+
+**Sehran**
+
+GitHub: https://github.com/Sehran0008
+
+---
+
+Made for learning and demonstrating full-stack web development.
