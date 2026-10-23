@@ -9,7 +9,18 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const TOKEN_LIFETIME = 8 * 60 * 60; // 8 hours
 
-app.use(cors());
+const allowedOrigins = [
+  "https://lendswift-4.onrender.com",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 app.use(express.json({ limit: "20kb" }));
 
 // ---------------- ADMIN AUTHENTICATION ----------------
