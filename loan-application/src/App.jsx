@@ -808,7 +808,7 @@ if (submitted) {
               body: JSON.stringify({
                 name: applicantName.trim(),
                 email: email.trim(),
-                type: loanType + " Loan",
+                type: loanType,
                 amount: Number(amount),
                 tenure: Number(tenure),
               }),
@@ -835,7 +835,7 @@ if (submitted) {
           const newApplication = {
             id: newApplicationId,
             name: applicantName.trim(),
-            type: loanType + " Loan",
+            type: loanType,
             amount: Number(amount),
             tenure: Number(tenure),
             status: "Pending",
