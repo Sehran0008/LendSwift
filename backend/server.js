@@ -204,40 +204,95 @@ const applicationSchema = new mongoose.Schema(
 
 const Application = mongoose.model("Application", applicationSchema);
 
-// 1. Submit loan application (public route)
+ // 1. Submit loan application (public route)
 app.post("/api/applications", async (req, res) => {
   try {
     const { name, email, type, amount, tenure } = req.body || {};
 
+    // Validate name
     if (
       typeof name !== "string" ||
       !name.trim() ||
-      typeof email !== "string" ||
-      !email.trim() ||
-      typeof type !== "string" ||
-      !type.trim() ||
-      amount === "" ||
-      amount === null ||
-      amount === undefined ||
-      !Number.isFinite(Number(amount)) ||
-      Number(amount) < 50000 ||
-      tenure === "" ||
-      tenure === null ||
-      tenure === undefined ||
-      !Number.isFinite(Number(tenure)) ||
-      Number(tenure) <= 0
+      name.trim().length > 100
     ) {
       return res.status(400).json({
-        message: "Please provide valid application details.",
+        message: "Please provide a valid name (maximum 100 characters).",
       });
     }
 
+    // Validate email format
+    const normalizedEmail =
+      typeof email === "string" ? email.trim().toLowerCase() : "";
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (
+      !normalizedEmail ||
+      normalizedEmail.length > 254 ||
+      !emailRegex.test(normalizedEmail)
+    ) {
+      return res.status(400).json({
+        message: "Please provide a valid email address.",
+      });
+    }
+
+    // Validate allowed loan types
+    const allowedTypes = ["Personal", "Home", "Business"];
+
+    if (
+      typeof type !== "string" ||
+      !allowedTypes.includes(type.trim())
+    ) {
+      return res.status(400).json({
+        message: "Invalid loan type. Use Personal, Home, or Business.",
+      });
+    }
+
+    // Validate loan amount
+    const loanAmount = Number(amount);
+
+    const maxAmounts = {
+      Personal: 1000000,
+      Home: 10000000,
+      Business: 5000000,
+    };
+
+    if (
+      amount === "" ||
+      amount === null ||
+      amount === undefined ||
+      !Number.isFinite(loanAmount) ||
+      loanAmount < 50000 ||
+      loanAmount > maxAmounts[type.trim()]
+    ) {
+      return res.status(400).json({
+        message: "Loan amount is outside the allowed range.",
+      });
+    }
+
+    // Validate tenure (months)
+    const loanTenure = Number(tenure);
+
+    if (
+      tenure === "" ||
+      tenure === null ||
+      tenure === undefined ||
+      !Number.isInteger(loanTenure) ||
+      loanTenure < 1 ||
+      loanTenure > 360
+    ) {
+      return res.status(400).json({
+        message: "Please provide a valid tenure between 1 and 360 months.",
+      });
+    }
+
+    // Save validated application
     const application = await Application.create({
       name: name.trim(),
-      email: email.trim(),
+      email: normalizedEmail,
       type: type.trim(),
-      amount: Number(amount),
-      tenure: Number(tenure),
+      amount: loanAmount,
+      tenure: loanTenure,
     });
 
     return res.status(201).json({
