@@ -1,18 +1,18 @@
-
 const express = require("express");
+const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 const crypto = require("crypto");
 require("dotenv").config();
 const mongoose = require("mongoose");
-const rateLimit = require("express-rate-limit");
 
 const app = express();
+app.set("trust proxy", 1);
+
 const PORT = process.env.PORT || 5000;
 const TOKEN_LIFETIME = 8 * 60 * 60; // 8 hours
 
-const allowedOrigins = [
-  "https://lendswift-4.onrender.com",
-];
+// Allow requests from the deployed frontend only.
+const allowedOrigins = ["https://lendswift-4.onrender.com"];
 
 app.use(
   cors({
@@ -92,8 +92,6 @@ function verifyToken(token) {
 function requireAdmin(req, res, next) {
   const authorization = req.headers.authorization || "";
   const match = authorization.match(/^Bearer\s+(.+)$/i);
-  console.log("Authorization header received:", Boolean(match));
-  console.log("Token verified:", match ? verifyToken(match[1]) : false);
 
   if (!match || !verifyToken(match[1])) {
     return res.status(401).json({
@@ -103,19 +101,21 @@ function requireAdmin(req, res, next) {
 
   next();
 }
-// Admin login rate limiter
+
+// Limit admin login requests to 5 per 15 minutes per client IP.
 const adminLoginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 5,
   standardHeaders: "draft-8",
   legacyHeaders: false,
   message: {
-    message: "Too many login attempts. Please try again after 15 minutes."
-  }
+    message: "Too many login attempts. Please try again after 15 minutes.",
+  },
 });
 
-// Admin login
- app.post("/api/admin/login", adminLoginLimiter, (req, res) => {
+// ---------------- ADMIN LOGIN ----------------
+
+app.post("/api/admin/login", adminLoginLimiter, (req, res) => {
   if (!ADMIN_EMAIL || !ADMIN_PASSWORD_HASH || !ADMIN_TOKEN_SECRET) {
     return res.status(503).json({
       message: "Admin login is not configured. Check backend .env.",
@@ -169,14 +169,12 @@ const adminLoginLimiter = rateLimit({
 
 // ---------------- GENERAL ROUTES ----------------
 
-// Home route
 app.get("/", (req, res) => {
   res.json({
     message: "LendSwift Backend is running successfully!",
   });
 });
 
-// Health check
 app.get("/api/health", (req, res) => {
   res.json({
     status: "OK",
@@ -204,7 +202,8 @@ const applicationSchema = new mongoose.Schema(
 
 const Application = mongoose.model("Application", applicationSchema);
 
- // 1. Submit loan application (public route)
+// ---------------- SUBMIT LOAN APPLICATION ----------------
+
 app.post("/api/applications", async (req, res) => {
   try {
     const { name, email, type, amount, tenure } = req.body || {};
@@ -220,7 +219,7 @@ app.post("/api/applications", async (req, res) => {
       });
     }
 
-    // Validate email format
+    // Validate email
     const normalizedEmail =
       typeof email === "string" ? email.trim().toLowerCase() : "";
 
@@ -236,7 +235,7 @@ app.post("/api/applications", async (req, res) => {
       });
     }
 
-    // Validate allowed loan types
+    // Validate loan type
     const allowedTypes = ["Personal", "Home", "Business"];
 
     if (
@@ -270,7 +269,7 @@ app.post("/api/applications", async (req, res) => {
       });
     }
 
-    // Validate tenure (months)
+    // Validate tenure in months
     const loanTenure = Number(tenure);
 
     if (
@@ -310,13 +309,15 @@ app.post("/api/applications", async (req, res) => {
     });
   } catch (error) {
     console.error("Application save failed:", error.message);
+
     return res.status(500).json({
       message: "Could not save the application.",
     });
   }
 });
 
-// 2. Get all applications (admin only)
+// ---------------- GET ALL APPLICATIONS (ADMIN ONLY) ----------------
+
 app.get("/api/applications", requireAdmin, async (req, res) => {
   try {
     const applications = await Application.find()
@@ -337,13 +338,15 @@ app.get("/api/applications", requireAdmin, async (req, res) => {
     );
   } catch (error) {
     console.error("Fetch applications failed:", error.message);
+
     return res.status(500).json({
       message: "Could not fetch applications.",
     });
   }
 });
 
-// 3. Update status (admin only)
+// ---------------- UPDATE APPLICATION STATUS (ADMIN ONLY) ----------------
+
 app.patch(
   "/api/applications/:id/status",
   requireAdmin,
@@ -391,6 +394,7 @@ app.patch(
       });
     } catch (error) {
       console.error("Status update failed:", error.message);
+
       return res.status(500).json({
         message: "Could not update application status.",
       });
@@ -398,7 +402,8 @@ app.patch(
   }
 );
 
-// 4. Delete application (admin only)
+// ---------------- DELETE APPLICATION (ADMIN ONLY) ----------------
+
 app.delete(
   "/api/applications/:id",
   requireAdmin,
@@ -426,6 +431,7 @@ app.delete(
       });
     } catch (error) {
       console.error("Application delete failed:", error.message);
+
       return res.status(500).json({
         message: "Could not delete application.",
       });
@@ -446,9 +452,7 @@ mongoose
     console.log("MongoDB connected successfully!");
 
     app.listen(PORT, () => {
-      console.log(
-        `LendSwift backend running at http://localhost:${PORT}`
-      );
+      console.log(`LendSwift backend running at http://localhost:${PORT}`);
     });
   })
   .catch((error) => {
