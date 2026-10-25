@@ -1,26 +1,30 @@
 # LendSwift — Loan Application Management System
 
-LendSwift is a full-stack web application that allows users to submit loan applications and enables administrators to review submitted applications through an admin dashboard.
+LendSwift is a full-stack web application for submitting loan applications and managing them through an administrator dashboard. It demonstrates frontend development, backend APIs, database integration, and basic authentication controls.
 
 ## Live Demo
 
 - **Frontend:** https://lendswift-4.onrender.com
 - **Backend:** https://lendswift-3.onrender.com
-- **GitHub Repository:** https://github.com/Sehran0008/LendSwift
+- **GitHub:** https://github.com/Sehran0008/LendSwift
+
+> This project is intended for educational and demonstration purposes. It does not provide real loans or guarantee loan approval.
 
 ## Features
 
 - Multi-step loan application form
 - Personal, home, and business loan options
 - Loan amount and tenure selection
-- EMI calculation and repayment summary
-- Applicant information and document submission flow
-- Application data stored in MongoDB
+- EMI and repayment summary
+- Applicant information and document submission steps
+- Form validation and application submission
+- MongoDB database integration
 - Admin login and protected application APIs
-- Admin dashboard for viewing applications
-- Login rate limiting and server-side authentication checks
+- Admin dashboard for viewing submitted applications
+- Login rate limiting
+- Responsive user interface
 
-## Tech Stack
+## Technology Stack
 
 **Frontend**
 - React
@@ -38,11 +42,11 @@ LendSwift is a full-stack web application that allows users to submit loan appli
 - MongoDB
 - MongoDB Atlas
 
-**Deployment**
+**Deployment and Version Control**
 - Render
 - GitHub
 
-## Loan Application Flow
+## Application Workflow
 
 1. Loan Details
 2. Personal Information
@@ -55,30 +59,35 @@ LendSwift is a full-stack web application that allows users to submit loan appli
 
 ## Local Setup
 
-### 1. Clone the repository
+### Prerequisites
+
+- Node.js and npm
+- MongoDB Atlas account or a configured MongoDB instance
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Sehran0008/LendSwift.git
 cd LendSwift
 ```
 
-### 2. Start the backend
+### 2. Configure and Start the Backend
 
 ```bash
 cd backend
 npm install
 ```
 
-Configure the required backend environment variables in a local `.env` file using the variable names expected by the server. Never commit passwords, token secrets, or database credentials.
+Configure the environment variables required by the backend using the variable names expected by the server. Do not commit credentials or secret values.
 
-Start the backend using the start script configured in `backend/package.json`.
+Start the backend using the start script defined in `backend/package.json`.
 
-### 3. Start the frontend
+### 3. Start the Frontend
 
-Open another terminal:
+Open a separate terminal in the repository directory:
 
 ```bash
-cd "loan-application"
+cd loan-application
 npm install
 npm run dev
 ```
@@ -87,14 +96,14 @@ Configure the frontend API URL using the environment variable expected by the fr
 
 ## Security Notes
 
-- Keep credentials and secrets in environment variables.
-- Do not commit `.env` files or backup files containing secrets.
 - Admin application APIs require authentication.
-- Admin login has rate limiting.
+- Admin login uses rate limiting.
+- Keep database credentials, passwords, and token secrets in environment variables.
+- Never commit `.env` files, credentials, or real applicant information.
 
 ## Project Status
 
-The deployed application has been tested for loan submission, MongoDB persistence, admin dashboard visibility, login rate limiting, and unauthorized API access.
+The deployed application has been tested for loan submission, MongoDB data persistence, admin dashboard visibility, login rate limiting, and unauthorized API access.
 
 ## Author
 
