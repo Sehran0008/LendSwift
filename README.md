@@ -37,16 +37,16 @@ LendSwift is a full-stack web application for submitting loan applications and m
 7. Documents & Signature
 8. Review & Submit
 
-## Local Setup
+# Local Setup
 
-### 1. Clone the repository
+## 1. Clone the repository
 
 ```bash
 git clone https://github.com/Sehran0008/LendSwift.git
 cd LendSwift
 ```
 
-### 2. Start the backend
+## 2. Start the backend
 
 ```bash
 cd backend
@@ -56,7 +56,7 @@ npm start
 
 Configure the required environment variables before starting the backend.
 
-### 3. Start the frontend
+## 3. Start the frontend
 
 Open a second terminal:
 
