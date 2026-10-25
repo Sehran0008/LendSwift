@@ -1,25 +1,24 @@
-# LendSwift — Online Loan Application System
+# LendSwift — Loan Application Management System
 
-LendSwift is a full-stack web application that allows users to fill out loan application forms, review their details, and submit applications. An admin dashboard allows authorized administrators to view submitted applications.
+LendSwift is a full-stack web application that allows users to submit loan applications and enables administrators to review submitted applications through an admin dashboard.
 
 ## Live Demo
 
 - **Frontend:** https://lendswift-4.onrender.com
 - **Backend:** https://lendswift-3.onrender.com
-
-> This project is intended for demonstration and educational purposes. It does not provide real loans or process real loan approvals.
+- **GitHub Repository:** https://github.com/Sehran0008/LendSwift
 
 ## Features
 
 - Multi-step loan application form
 - Personal, home, and business loan options
-- Loan EMI calculation
-- Applicant information and document steps
-- Form validation and application submission
-- MongoDB database integration
-- Admin login and protected application dashboard
-- Search and filter applications
-- Responsive user interface
+- Loan amount and tenure selection
+- EMI calculation and repayment summary
+- Applicant information and document submission flow
+- Application data stored in MongoDB
+- Admin login and protected application APIs
+- Admin dashboard for viewing applications
+- Login rate limiting and server-side authentication checks
 
 ## Tech Stack
 
@@ -33,74 +32,71 @@ LendSwift is a full-stack web application that allows users to fill out loan app
 **Backend**
 - Node.js
 - Express.js
+- REST APIs
+
+**Database**
 - MongoDB
-- MongoDB Node.js integration
+- MongoDB Atlas
 
 **Deployment**
 - Render
-- MongoDB Atlas
 - GitHub
 
-## Application Workflow
+## Loan Application Flow
 
-1. Select a loan type and enter loan details.
-2. Complete the applicant information.
-3. Review the application.
-4. Submit the application.
-5. Authorized admins can view saved applications in the dashboard.
+1. Loan Details
+2. Personal Information
+3. KYC Verification
+4. Address
+5. Employment & Income
+6. Co-Applicant
+7. Documents & Signature
+8. Review & Submit
 
-## Run Locally
+## Local Setup
 
-### Prerequisites
-- Node.js and npm
-- MongoDB Atlas account or a local MongoDB instance
+### 1. Clone the repository
 
-### Backend Setup
+```bash
+git clone https://github.com/Sehran0008/LendSwift.git
+cd LendSwift
+```
+
+### 2. Start the backend
 
 ```bash
 cd backend
 npm install
 ```
 
-Configure the required environment variables using the project's existing configuration and documentation. Never commit credentials or secret values.
+Configure the required backend environment variables in a local `.env` file using the variable names expected by the server. Never commit passwords, token secrets, or database credentials.
 
-Start the backend using the start script defined in `backend/package.json`.
+Start the backend using the start script configured in `backend/package.json`.
 
-### Frontend Setup
+### 3. Start the frontend
+
+Open another terminal:
 
 ```bash
-cd loan-application
+cd "loan-application"
 npm install
-```
-
-Create a local `.env` file with the appropriate API URL configuration:
-
-```env
-VITE_API_URL=http://localhost:10000
-```
-
-Run the frontend:
-
-```bash
 npm run dev
 ```
 
-Use the actual backend port configured in your local environment if it differs.
+Configure the frontend API URL using the environment variable expected by the frontend.
 
 ## Security Notes
 
-- Admin access is protected by authentication.
-- Database access should follow the principle of least privilege.
-- Store passwords, database connection strings, and token secrets in environment variables.
-- Do not commit `.env` files or real applicant information.
-- This demonstration project has not been represented as a production-ready lending platform.
+- Keep credentials and secrets in environment variables.
+- Do not commit `.env` files or backup files containing secrets.
+- Admin application APIs require authentication.
+- Admin login has rate limiting.
+
+## Project Status
+
+The deployed application has been tested for loan submission, MongoDB persistence, admin dashboard visibility, login rate limiting, and unauthorized API access.
 
 ## Author
 
-**Sehran**
-
-GitHub: https://github.com/Sehran0008
-
----
-
-Made for learning and demonstrating full-stack web development.
+**Sehran**  
+B.Tech — Computer Science & Engineering
